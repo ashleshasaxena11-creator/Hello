@@ -2,65 +2,220 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Maulik ❤️</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#ff4d88,#7b2ff7);display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden;color:#fff}
-.card{width:min(92vw,420px);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);padding:28px;border-radius:24px;text-align:center}
-button{padding:13px 24px;border:none;border-radius:999px;font-size:18px;font-weight:700;cursor:pointer;background:#fff;color:#d81b60;margin:8px 0}
-.heart{position:fixed;bottom:-30px;animation:rise 4s linear forwards;font-size:24px}
-@keyframes rise{to{transform:translateY(-120vh) rotate(360deg);opacity:0}}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff4d88,#7b2ff7);
+    color:white;
+}
+
+.card{
+    width:min(92vw,420px);
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    border-radius:24px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:999px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:8px;
+    transition:.3s;
+    background:white;
+    color:#d81b60;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.heart{
+    position:fixed;
+    bottom:-40px;
+    animation:float 4s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes float{
+    to{
+        transform:translateY(-120vh) rotate(360deg);
+        opacity:0;
+    }
+}
 </style>
+
 </head>
 <body>
+
 <div class="card" id="card">
+
 <h1>Hi Maulik 👋</h1>
-<p>I made a tiny surprise just for you.</p>
+
+<p style="margin:20px 0;">
+I made a tiny surprise just for you.
+</p>
+
 <button onclick="next1()">Tap to Continue</button>
+
 </div>
 
 <script>
-function setCard(html){document.getElementById('card').innerHTML=html;}
+
+function setCard(html){
+    document.getElementById("card").innerHTML=html;
+}
 
 function next1(){
+
 setCard(`
+
 <h2>🌍 Where would you like to go? 😊</h2>
-<p>Choose the one that sounds the most fun. 😊</p>
+
+<p style="margin:18px 0;">
+Choose the one that sounds the most fun.
+</p>
+
 <button onclick="pick('☕ Coffee')">☕ Coffee</button><br>
+
 <button onclick="pick('🎬 Movie')">🎬 Movie</button><br>
+
 <button onclick="pick('🚗 Long Drive')">🚗 Long Drive</button>
+
 `);
+
 }
 
 function pick(choice){
+
 setCard(`
+
 <h2>${choice} sounds perfect! ✨</h2>
-<p>But before we plan it...</p>
-<button onclick="ask()">One last thing ❤️</button>
+
+<p style="margin:20px 0;">
+But before we plan it...
+</p>
+
+<button onclick="ask()">
+One Last Thing ❤️
+</button>
+
 `);
+
 }
 
 function ask(){
+
 setCard(`
+
 <h1>💖 One Last Question 💖</h1>
-<p style="font-size:22px">Maulik,<br><b>Will you be my date?</b> ❤️</p>
-<button onclick="yes()">YES 🥹</button>
+
+<p style="font-size:22px;margin:20px 0;">
+Maulik,<br>
+<b>Will you be my date?</b> ❤️
+</p>
+
+<div id="buttonArea"
+style="position:relative;height:150px;">
+
+<button onclick="yes()">
+YES 🥹
+</button>
+
+<button
+id="noBtn"
+style="
+position:absolute;
+left:200px;
+top:0;
+background:#ffe5ec;
+color:#d81b60;
+"
+onmouseover="moveNo(event)"
+ontouchstart="moveNo(event)">
+NO 🙈
+</button>
+
+</div>
+
 `);
+
+}
+
+function moveNo(e){
+
+e.preventDefault();
+
+const btn=document.getElementById("noBtn");
+
+const maxX=window.innerWidth-120;
+const maxY=window.innerHeight-70;
+
+btn.style.position="fixed";
+btn.style.left=Math.random()*maxX+"px";
+btn.style.top=Math.random()*maxY+"px";
+
 }
 
 function yes(){
-setCard("<h1>🥹❤️ YAY! ❤️</h1><h2>You just made Ashlesha's day.</h2><p>❤️ Thank you for saying yes. 🌹</p>");
+
+setCard(`
+
+<h1>🥹❤️ YAY! ❤️</h1>
+
+<h2 style="margin-top:15px;">
+You just made Ashlesha's day.
+</h2>
+
+<p style="margin-top:20px;font-size:20px;">
+❤️ Thank you for saying yes. 🌹
+</p>
+
+`);
+
 for(let i=0;i<150;i++){
- const h=document.createElement('div');
- h.className='heart';
- h.textContent=Math.random()>.5?'❤️':'💖';
- h.style.left=Math.random()*100+'vw';
- h.style.fontSize=(18+Math.random()*20)+'px';
- h.style.animationDuration=(2+Math.random()*3)+'s';
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),5000);
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML=Math.random()>.5?"❤️":"💖";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(18+Math.random()*22)+"px";
+
+h.style.animationDuration=(2+Math.random()*3)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),5000);
+
 }
+
 }
+
 </script>
+
 </body>
 </html>
